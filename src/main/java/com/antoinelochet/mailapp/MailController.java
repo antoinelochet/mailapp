@@ -42,14 +42,15 @@ public class MailController {
     private Configuration freeMarkerConfiguration;
 
     @PostMapping(value = "contact")
-    public void sendMail(@RequestParam("apikey") String apiKey, @RequestParam("contact") String contact, @RequestParam("message") String message) {
+    public void sendMail(@RequestParam("apikey") String apiKey, @RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("message") String message) {
         final String recipient = this.environment.getRequiredProperty(apiKey);
         MimeMessagePreparator preparator = mimeMessage -> {
             final MimeMessageHelper mail = new MimeMessageHelper(mimeMessage, ENCODING_UTF_8);
             mail.setTo(recipient);
             mail.setFrom(this.environment.getRequiredProperty(FROM), this.environment.getRequiredProperty(FROM_NAME));
             final Map<String, Object> model = new HashMap<>();
-            model.put("contact", contact);
+            model.put("email", email);
+            model.put("name", name);
             model.put("message", message);
             final String text = FreeMarkerTemplateUtils.processTemplateIntoString(this.freeMarkerConfiguration.getTemplate("contact.vm"), model);
             mail.setText(text, true);

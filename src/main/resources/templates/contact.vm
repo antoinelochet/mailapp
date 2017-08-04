@@ -2,10 +2,10 @@
 <body>
 <div style="background-color: rgb(240,241,241);">
     <h2 style="background-color: rgb(63,140,206);padding:10px;color:white;text-align:center; margin-top: 0;">
-        Nouveau message de ${contact}</h2>
+        Nouveau message de ${name}</h2>
     <div style="padding:10px;">
         <div>
-            Email: <a href="mailto:${contact}">${contact}</a>
+            Email: <a href="mailto:${email}">${email}</a>
         </div>
         <br/>
         <div>
