@@ -29,7 +29,7 @@ public class MailServiceImpl implements MailService {
     @Override
     @Async
     public void sendEmail(final MimeMessage mimeMessage, final String to) {
-        LOGGER.debug("Sending a new mail of type {} to {}", to);
+        LOGGER.debug("Sending a new mail to {}", to);
         try {
             if (!Boolean.parseBoolean(this.env.getRequiredProperty(ENABLED))) {
                 LOGGER.info("Mail send is disabled.");
@@ -37,7 +37,7 @@ public class MailServiceImpl implements MailService {
             }
             this.mailSender.send(mimeMessage);
         } catch (MailException e) {
-            LOGGER.error("Mail of type {} to {} could not be sent", to, e);
+            LOGGER.error("Mail to {} could not be sent", to, e);
         }
     }
 }
